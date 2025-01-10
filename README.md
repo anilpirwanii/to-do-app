@@ -75,24 +75,19 @@ To run the project locally:
    ```bash
    git clone <repository-link>
    ```
-
-Navigate to the project directory:
-bash
-Copy code
+## Navigate to the project directory:
+``` bash
 cd todo-app
-Install dependencies:
-bash
-Copy code
+```
+## Install dependencies:
+```bash
 npm install
-Run the development server:
-bash
-Copy code
+```
+## Run the development server:
+```bash
 npm run dev
+```
 Open http://localhost:3000 in your browser.
-Live Demo
+
+## Live Demo
 Try out the live app here: https://todo-qd5pf7fcl-anilpirwaniis-projects.vercel.app/
-
-sql
-Copy code
-
-You can copy and paste this directly into your `README.md` file. Let me know if you need any changes! 😊
