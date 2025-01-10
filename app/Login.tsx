@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { User } from "firebase/auth";
-import { FirebaseError } from "firebase/app";
 import { auth } from "../firebase"; // Import your `auth` from firebase.js
 
 export default function Login({ onLogin }: { onLogin: (user: User) => void }) {
@@ -24,23 +23,29 @@ export default function Login({ onLogin }: { onLogin: (user: User) => void }) {
         userCredential = await signInWithEmailAndPassword(auth, email, password);
       }
       onLogin(userCredential.user); // Pass the user object to parent
-    } catch (error: any) {
-      if (error.code === "auth/email-already-in-use") {
-        setError("This email is already registered. Please log in instead.");
-      } else if (error.code === "auth/user-not-found") {
-        setError("No user found with this email.");
-      } else if (error.code === "auth/wrong-password") {
-        setError("Incorrect password.");
-      } else if (error.code === "auth/invalid-email") {
-        setError("Invalid email format.");
-      } else {
-        setError(
-          isRegister
-            ? "Failed to register. Please try again."
-            : "Failed to log in. Please check your credentials."
-        );
+    } catch (error: unknown) {
+        if (typeof error === "object" && error !== null && "code" in error) {
+          const firebaseError = error as { code: string };
+          if (firebaseError.code === "auth/email-already-in-use") {
+            setError("This email is already registered. Please log in instead.");
+          } else if (firebaseError.code === "auth/user-not-found") {
+            setError("No user found with this email.");
+          } else if (firebaseError.code === "auth/wrong-password") {
+            setError("Incorrect password.");
+          } else if (firebaseError.code === "auth/invalid-email") {
+            setError("Invalid email format.");
+          } else {
+            setError(
+              isRegister
+                ? "Failed to register. Please try again."
+                : "Failed to log in. Please check your credentials."
+            );
+          }
+        } else {
+          setError("An unexpected error occurred.");
+        }
       }
-    }
+      
   };
    
   
