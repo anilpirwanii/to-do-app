@@ -26,16 +26,19 @@ export default function TodoList({ userId }: { userId: string }) {
       const taskSnapshot = await getDocs(q);
   
       const fetchedTasks = taskSnapshot.docs.map(doc => {
-        const { id, ...data } = doc.data() as Task; // Avoid potential conflict with id in data
+        const data = doc.data();
         return {
-          id: doc.id, // Explicit Firestore document ID
-          ...data,    // Spread the rest of the fields
-        };
+          id: doc.id,
+          text: data.text || "",
+          completed: data.completed || false,
+          userId: data.userId || "",
+        } as Task;
       });
+  
       setTasks(fetchedTasks);
     };
     fetchTasks();
-  }, [userId]);
+  }, [userId]);  
   
 
   const addTask = async (e: React.FormEvent) => {
@@ -53,17 +56,25 @@ export default function TodoList({ userId }: { userId: string }) {
   
         console.log("Task added with ID:", docRef.id); // Debug Firestore document ID
   
-        setTasks([
-          ...tasks,
-          {
-            id: docRef.id,
-            text: newTask.trim(),
-            completed: false,
-            userId: userId, // Ensure the userId is part of the task state
-          },
-        ]);
+        const addedTask = {
+          id: docRef.id,
+          text: newTask.trim(),
+          completed: false,
+          userId: userId, // Ensure the userId is part of the task state
+          new: true, // Add the `new` property
+        };
   
+        setTasks([...tasks, addedTask]);
         setNewTask(""); // Clear input field
+  
+        // Remove the `new` property after 1 second
+        setTimeout(() => {
+          setTasks((prevTasks) =>
+            prevTasks.map((task) =>
+              task.id === docRef.id ? { ...task, new: false } : task
+            )
+          );
+        }, 1000);
       } catch (error) {
         console.error("Error adding task:", error); // Debug any errors
       }
@@ -71,6 +82,7 @@ export default function TodoList({ userId }: { userId: string }) {
       console.log("Task is empty, not adding.");
     }
   };
+  
   
   
   const deleteTask = async (id: string) => {

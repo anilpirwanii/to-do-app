@@ -19,7 +19,7 @@ export default function Home() {
     return () => unsubscribe();
   }, []);
 
-  const handleLogin = (loggedInUser: any) => {
+  const handleLogin = (loggedInUser: User) => {
     setUser(loggedInUser); // Pass the user object from the Login component
   };
 
