@@ -1,47 +1,92 @@
 "use client";
 
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
 import { Trash2 } from "lucide-react";
+import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc, query, where } from "firebase/firestore";
+import { db } from "../firebase"; 
+
 
 interface Task {
-  id: number;
+  id: string;
   text: string;
   completed: boolean;
   new?: boolean;
+  userId: string;
 }
 
-export default function TodoList() {
+export default function TodoList({ userId }: { userId: string }) {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [newTask, setNewTask] = useState("");
 
-  const addTask = (e: React.FormEvent) => {
+  useEffect(() => {
+    const fetchTasks = async () => {
+      const tasksRef = collection(db, "tasks");
+      const q = query(tasksRef, where("userId", "==", userId));
+      const taskSnapshot = await getDocs(q);
+  
+      const fetchedTasks = taskSnapshot.docs.map(doc => {
+        const { id, ...data } = doc.data() as Task; // Avoid potential conflict with id in data
+        return {
+          id: doc.id, // Explicit Firestore document ID
+          ...data,    // Spread the rest of the fields
+        };
+      });
+      setTasks(fetchedTasks);
+    };
+    fetchTasks();
+  }, [userId]);
+  
+
+  const addTask = async (e: React.FormEvent) => {
     e.preventDefault();
     if (newTask.trim()) {
-      setTasks([
-        ...tasks,
-        { id: Date.now(), text: newTask.trim(), completed: false, new: true },
-      ]);
-      setNewTask("");
-      setTimeout(() => {
-        setTasks((prev) =>
-          prev.map((task) => ({ ...task, new: task.new ? false : task.new }))
-        );
-      }, 2000); // Remove the highlight after 2 seconds
+      console.log("Adding Task:", newTask); // Debug the new task text
+      console.log("User ID in TodoList:", userId);
+  
+      try {
+        const docRef = await addDoc(collection(db, "tasks"), {
+          text: newTask.trim(),
+          completed: false,
+          userId: userId, // Ensure userId is passed to Firestore
+        });
+  
+        console.log("Task added with ID:", docRef.id); // Debug Firestore document ID
+  
+        setTasks([
+          ...tasks,
+          {
+            id: docRef.id,
+            text: newTask.trim(),
+            completed: false,
+            userId: userId, // Ensure the userId is part of the task state
+          },
+        ]);
+  
+        setNewTask(""); // Clear input field
+      } catch (error) {
+        console.error("Error adding task:", error); // Debug any errors
+      }
+    } else {
+      console.log("Task is empty, not adding.");
     }
   };
   
-
-  const deleteTask = (id: number) => {
+  
+  const deleteTask = async (id: string) => {
+    await deleteDoc(doc(db, "tasks", id));
     setTasks(tasks.filter((task) => task.id !== id));
   };
 
-  const toggleTask = (id: number) => {
+  const toggleTask = async (id: string, completed: boolean) => {
+    await updateDoc(doc(db, "tasks", id), { completed: !completed });
     setTasks(
       tasks.map((task) =>
         task.id === id ? { ...task, completed: !task.completed } : task
       )
     );
   };
+  
 
   const remainingTasks = tasks.filter((task) => !task.completed).length;
 
@@ -75,7 +120,7 @@ export default function TodoList() {
                 <input
                 type="checkbox"
                 checked={task.completed}
-                onChange={() => toggleTask(task.id)}
+                onChange={() => toggleTask(task.id, task.completed)}
                 className="h-4 w-4 text-purple-600 border-gray-300 focus:ring-purple-500"
                 />
                 <span
