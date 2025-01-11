@@ -100,7 +100,7 @@ export default function Login({ onLogin }: { onLogin: (user: User) => void }) {
         <p style={{ margin: "10px 0" }}>
           🌟 Powered by{" "}
           <a
-            href="https://github.com/anilpirwanii/todo-list-app"
+            href="https://github.com/anilpirwanii/to-do-app"
             target="_blank"
             style={{
               textDecoration: "none",
