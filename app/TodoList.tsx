@@ -54,7 +54,7 @@ export default function TodoList({ userId }: { userId: string }) {
           userId: userId, // Ensure userId is passed to Firestore
         });
   
-        console.log("Task added with ID:", docRef.id); // Debug Firestore document ID
+        console.log("Task added with ID:", docRef.id); 
   
         const addedTask = {
           id: docRef.id,
