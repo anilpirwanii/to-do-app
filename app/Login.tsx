@@ -80,105 +80,105 @@ export default function Login({ onLogin }: { onLogin: (user: User) => void }) {
         {isRegister ? "Already have an account? Login" : "Don't have an account? Register"}
       </button>
 
+      {/* Contact card */}
       <div
-  style={{
-    textAlign: "center",
-    padding: "20px",
-    fontSize: "16px",
-    fontFamily: "Arial, sans-serif",
-    backgroundColor: "#f8f9fa",
-    borderRadius: "15px",
-    boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-    border: "1px solid #6c63ff",
-    marginTop: "20px",
-    maxWidth: "400px",
-    margin: "20px auto",
-  }}
->
-  <p style={{ margin: "10px 0" }}>
-    🌟 Powered by{" "}
-    <a
-      href="https://github.com/anilpirwanii/todo-list-app"
-      target="_blank"
-      style={{
-        textDecoration: "none",
-        color: "#6c63ff",
-      }}
-    >
-      <b>To-Do List App</b>
-    </a>
-  </p>
-  <p style={{ margin: "10px 0" }}>📝 Created by <b>Anil Kumar</b></p>
-  <p style={{ margin: "10px 0" }}>
-    📧{" "}
-    <a
-      href="mailto:aka158@sfu.ca"
-      style={{
-        textDecoration: "none",
-        color: "#6c63ff",
-      }}
-    >
-      aka158@sfu.ca
-    </a>
-  </p>
-  <div
-    style={{
-      display: "inline-flex",
-      alignItems: "center",
-      gap: "10px",
-      justifyContent: "center",
-      marginTop: "10px",
-    }}
-  >
-    <a
-      href="https://github.com/anilpirwanii/"
-      target="_blank"
-      style={{
-        textDecoration: "none",
-        color: "#6c63ff",
-        display: "inline-flex",
-        alignItems: "center",
-      }}
-    >
-      <img
-        src="https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/github.svg"
-        alt="GitHub"
         style={{
-          width: "20px",
-          height: "20px",
-          verticalAlign: "middle",
-          marginRight: "5px",
+          textAlign: "center",
+          padding: "20px",
+          fontSize: "16px",
+          fontFamily: "Arial, sans-serif",
+          backgroundColor: "#ffffff", // Explicitly set background color for readability
+          borderRadius: "15px",
+          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+          border: "1px solid #6c63ff",
+          marginTop: "20px",
+          maxWidth: "400px",
+          margin: "20px auto",
+          color: "#000000", // Set text color for readability
         }}
-      />
-      GitHub
-    </a>
-    <span>|</span>
-    <a
-      href="https://linkedin.com/in/anilpirwanii/"
-      target="_blank"
-      style={{
-        textDecoration: "none",
-        color: "#6c63ff",
-        display: "inline-flex",
-        alignItems: "center",
-      }}
-    >
-      <img
-        src="https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/linkedin.svg"
-        alt="LinkedIn"
-        style={{
-          width: "20px",
-          height: "20px",
-          verticalAlign: "middle",
-          marginRight: "5px",
-        }}
-      />
-      LinkedIn
-    </a>
-  </div>
-</div>
-
-
+      >
+        <p style={{ margin: "10px 0" }}>
+          🌟 Powered by{" "}
+          <a
+            href="https://github.com/anilpirwanii/todo-list-app"
+            target="_blank"
+            style={{
+              textDecoration: "none",
+              color: "#6c63ff",
+            }}
+          >
+            <b>To-Do List App</b>
+          </a>
+        </p>
+        <p style={{ margin: "10px 0" }}>📝 Created by <b>Anil Kumar</b></p>
+        <p style={{ margin: "10px 0" }}>
+          📧{" "}
+          <a
+            href="mailto:aka158@sfu.ca"
+            style={{
+              textDecoration: "none",
+              color: "#6c63ff",
+            }}
+          >
+            aka158@sfu.ca
+          </a>
+        </p>
+        <div
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "10px",
+            justifyContent: "center",
+            marginTop: "10px",
+          }}
+        >
+          <a
+            href="https://github.com/anilpirwanii/"
+            target="_blank"
+            style={{
+              textDecoration: "none",
+              color: "#6c63ff",
+              display: "inline-flex",
+              alignItems: "center",
+            }}
+          >
+            <img
+              src="https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/github.svg"
+              alt="GitHub"
+              style={{
+                width: "20px",
+                height: "20px",
+                verticalAlign: "middle",
+                marginRight: "5px",
+              }}
+            />
+            GitHub
+          </a>
+          <span>|</span>
+          <a
+            href="https://linkedin.com/in/anilpirwanii/"
+            target="_blank"
+            style={{
+              textDecoration: "none",
+              color: "#6c63ff",
+              display: "inline-flex",
+              alignItems: "center",
+            }}
+          >
+            <img
+              src="https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/linkedin.svg"
+              alt="LinkedIn"
+              style={{
+                width: "20px",
+                height: "20px",
+                verticalAlign: "middle",
+                marginRight: "5px",
+              }}
+            />
+            LinkedIn
+          </a>
+        </div>
+      </div>
     </div>
   );
 }

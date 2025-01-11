@@ -2,7 +2,7 @@
 
 A sleek, user-friendly to-do list application that helps users manage their daily tasks efficiently. This project demonstrates the integration of a full-stack web application using modern technologies, showcasing features like authentication, user-specific task management, and real-time updates.
 
-🚀 **Live Demo**: [https://todo-qd5pf7fcl-anilpirwaniis-projects.vercel.app/](https://todo-qd5pf7fcl-anilpirwaniis-projects.vercel.app/)
+🚀 **Live Demo**: [To-do app](https://todo-jyulqlb9p-anilpirwaniis-projects.vercel.app/)
 
 ---
 
@@ -90,4 +90,4 @@ npm run dev
 Open http://localhost:3000 in your browser.
 
 ## Live Demo
-Try out the live app here: https://todo-qd5pf7fcl-anilpirwaniis-projects.vercel.app/
+Try out the live app here: [To-do app](https://todo-jyulqlb9p-anilpirwaniis-projects.vercel.app/)
