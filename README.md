@@ -4,6 +4,8 @@ A sleek, user-friendly to-do list application that helps users manage their dail
 
 🚀 **Live Demo**: [To-do app](https://to-do-app-anilpirwanii.vercel.app/)
 
+Create an account and add your tasks that only YOU have access to!
+
 ---
 
 ## Features
